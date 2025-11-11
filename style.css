@@ -1,1864 +1,717 @@
 /* ============================================================
-   MODERN B3I.TECH GLASSMORPHIC STYLES — ENHANCED 2025 EDITION
-   - Performance-optimized with modern CSS features
-   - Elementor-friendly scope (place in Site Settings or Additional CSS)
-   - Advanced animations and micro-interactions
-   - Full accessibility support
-   - Responsive with container queries
+   B3I.TECH MODERN CONTENT STYLING — 2025 EDITION
+   - Clean, professional design for article content
+   - WordPress/Elementor compatible
+   - Responsive and accessible
+   - Reusable component system
 
-   IMPORTANT FOR WORDPRESS/ELEMENTOR USAGE:
-   - Wrap your content in a <div class="crypto-article"> or similar
-   - This provides the necessary dark background for glassmorphic effects
-   - Individual cards use .ltc_card class
-   - The dark background is REQUIRED for proper text visibility
+   USAGE:
+   Add this CSS to your WordPress theme's custom CSS or
+   Elementor's custom CSS section. All classes are prefixed
+   to avoid conflicts.
    ============================================================ */
 
 /* =========================
-   ROOT VARIABLES / ENHANCED THEME SYSTEM
+   BASE RESET & TYPOGRAPHY
    ========================= */
-:root{
-  /* Enhanced Gold Scale - Modern Color System */
-  --gold-50: #FFF9E6;
-  --gold-100: #FFF3CC;
-  --gold-200: #FFE699;
-  --gold-300: #FFD966;
-  --gold-400: #FFCD33;
-  --gold-500: #FCC419;  /* Primary */
-  --gold-600: #FAB005;
-  --gold-700: #F59F00;
-  --gold-800: #F08C00;
-  --gold-900: #E67700;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  /* Brand - Using enhanced scale */
-  --primary-gold: var(--gold-500);
-  --primary-gold-hover: var(--gold-400);
-  --primary-gold-dark: var(--gold-600);
-  --primary-gold-light: var(--gold-300);
-  --primary-gold-10: rgba(252,196,25,0.10);
-  --primary-gold-20: rgba(252,196,25,0.20);
-  --primary-gold-30: rgba(252,196,25,0.30);
+/* Only reset within our content area to avoid affecting WordPress */
+.b3i-content * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  /* Enhanced Dark Palette with Gradations */
-  --bg-primary: #0A0A0B;
-  --bg-secondary: #13131A;
-  --bg-surface: #1F1F23;
-  --bg-surface-elevated: #2A2A30;
-  --bg-surface-hover: #35353D;
-
-  /* Advanced Glass Effects */
-  --glass-white-subtle: rgba(255,255,255,0.02);
-  --glass-white: rgba(255,255,255,0.04);
-  --glass-white-hover: rgba(255,255,255,0.08);
-  --glass-white-active: rgba(255,255,255,0.12);
-  --glass-border-subtle: rgba(255,255,255,0.05);
-  --glass-border: rgba(255,255,255,0.08);
-  --glass-border-hover: rgba(255,255,255,0.15);
-  --glass-border-strong: rgba(255,255,255,0.20);
-
-  /* Modern Layered Shadows */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.15);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.20), 0 1px 2px rgba(0,0,0,0.15);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.20);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.30), 0 4px 8px rgba(0,0,0,0.25);
-  --shadow-xl: 0 12px 48px rgba(0,0,0,0.35), 0 8px 16px rgba(0,0,0,0.30);
-  --shadow-2xl: 0 24px 64px rgba(0,0,0,0.40), 0 12px 24px rgba(0,0,0,0.35);
-
-  --glass-shadow: var(--shadow-lg);
-  --glass-shadow-hover: var(--shadow-xl);
-  --glass-shadow-focus: 0 0 0 4px var(--primary-gold-20), var(--shadow-xl);
-
-  /* Advanced Blur System */
-  --blur-subtle: blur(8px);
-  --blur-medium: blur(12px);
-  --blur-strong: blur(16px);
-  --blur-intense: blur(24px);
-
-  /* Enhanced Typography Scale */
-  --text-primary: rgba(255,255,255,0.98);
-  --text-secondary: rgba(255,255,255,0.85);
-  --text-tertiary: rgba(255,255,255,0.65);
-  --text-muted: rgba(255,255,255,0.50);
-  --text-disabled: rgba(255,255,255,0.35);
-
-  /* Font Families - Modern Stack */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-display: "Inter", var(--font-sans);
-  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-
-  /* Fluid Typography */
-  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
-  --text-3xl: clamp(1.875rem, 1.65rem + 1.125vw, 2.25rem);
-  --text-4xl: clamp(2.25rem, 1.95rem + 1.5vw, 3rem);
-  --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 3.75rem);
-
-  /* Enhanced Semantic Colors */
-  --success-light: #34D399;
-  --success: #10B981;
-  --success-dark: #059669;
-  --success-bg: rgba(16,185,129,0.08);
-
-  --error-light: #F87171;
-  --error: #EF4444;
-  --error-dark: #DC2626;
-  --error-bg: rgba(239,68,68,0.08);
-
-  --warning-light: #FBBF24;
-  --warning: #F59E0B;
-  --warning-dark: #D97706;
-  --warning-bg: rgba(245,158,11,0.08);
-
-  --info-light: #38BDF8;
-  --info: #0EA5E9;
-  --info-dark: #0284C7;
-  --info-bg: rgba(14,165,233,0.08);
-
-  /* Advanced Motion System */
-  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  --transition-instant: 100ms var(--ease-in-out-smooth);
-  --transition-fast: 200ms var(--ease-in-out-smooth);
-  --transition-base: 300ms var(--ease-in-out-smooth);
-  --transition-smooth: 400ms var(--ease-out-expo);
-  --transition-slow: 600ms var(--ease-out-expo);
-  --transition-spring: 500ms var(--ease-spring);
-
-  /* Enhanced Spacing Scale */
-  --space-0: 0;
-  --space-px: 1px;
-  --space-0-5: 0.125rem;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-
-  /* Modern Border Radius */
-  --radius-none: 0;
-  --radius-sm: clamp(6px, 0.8vw, 8px);
-  --radius-md: clamp(10px, 1.2vw, 14px);
-  --radius-lg: clamp(14px, 1.8vw, 20px);
-  --radius-xl: clamp(20px, 2.5vw, 28px);
-  --radius-2xl: clamp(28px, 3.5vw, 36px);
-  --radius-3xl: clamp(36px, 4.5vw, 48px);
-  --radius-full: 9999px;
-
-  /* Z-index Scale */
-  --z-base: 0;
-  --z-dropdown: 1000;
-  --z-sticky: 1100;
-  --z-fixed: 1200;
-  --z-modal-backdrop: 1300;
-  --z-modal: 1400;
-  --z-popover: 1500;
-  --z-tooltip: 1600;
+/* Main content wrapper */
+.b3i-content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.8;
+    color: #1a1a1a;
+    background: #ffffff;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* =========================
-   GLOBAL OPTIMIZATIONS & MODERN RESET
+   HEADINGS
    ========================= */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  overflow-x: hidden;
-}
-
-/* Modern Image Optimization */
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* Form Elements */
-input, button, textarea, select {
-  font: inherit;
-  color: inherit;
-}
-
-/* Remove default button styles */
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-/* Smooth scrolling for anchors */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  html:focus-within {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Prefer reduced motion - Accessibility First */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* =========================
-   MODERN GLASS EFFECTS & BACKDROP FILTERS
-   ========================= */
-
-/* Enhanced glassmorphism with progressive enhancement */
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .glass-effect-subtle {
-    backdrop-filter: var(--blur-subtle);
-    -webkit-backdrop-filter: var(--blur-subtle);
-  }
-
-  .glass-effect {
-    backdrop-filter: var(--blur-medium);
-    -webkit-backdrop-filter: var(--blur-medium);
-  }
-
-  .glass-effect-strong {
-    backdrop-filter: var(--blur-strong);
-    -webkit-backdrop-filter: var(--blur-strong);
-  }
-
-  .glass-effect-intense {
-    backdrop-filter: var(--blur-intense);
-    -webkit-backdrop-filter: var(--blur-intense);
-  }
-}
-
-/* Fallback for browsers without backdrop-filter support */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass-effect-subtle {
-    background: rgba(255,255,255,0.03) !important;
-  }
-
-  .glass-effect {
-    background: rgba(255,255,255,0.05) !important;
-  }
-
-  .glass-effect-strong {
-    background: rgba(255,255,255,0.08) !important;
-  }
-
-  .glass-effect-intense {
-    background: rgba(255,255,255,0.12) !important;
-  }
-}
-
-/* Modern Gradient Mesh Backgrounds */
-.gradient-mesh-gold {
-  background:
-    radial-gradient(at 27% 37%, rgba(252, 196, 25, 0.15) 0px, transparent 50%),
-    radial-gradient(at 97% 21%, rgba(252, 196, 25, 0.10) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, rgba(252, 196, 25, 0.08) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, rgba(252, 196, 25, 0.12) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, rgba(252, 196, 25, 0.06) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, rgba(252, 196, 25, 0.10) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, rgba(252, 196, 25, 0.08) 0px, transparent 50%);
-}
-
-/* =========================
-   SHARED SELECTOR GROUPING & MAIN CONTAINER SETUP
-   Targets: Coinbase tile, crypto article, ltc_* blocks
-   IMPORTANT: Sets dark background for proper glassmorphic effect
-   ========================= */
-.coinbase-affiliate-tile,
-.crypto-article,
-[class^="ltc_"] {
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-}
-
-/* Main containers MUST have dark background for glassmorphic design */
-.coinbase-affiliate-tile,
-.crypto-article {
-  background: var(--bg-primary);
-  min-height: 100%;
-  padding: clamp(var(--space-6), 4vw, var(--space-12));
-  position: relative;
-}
-
-/* Ensure all headings are visible with proper colors */
-.coinbase-affiliate-tile h1,
-.coinbase-affiliate-tile h2,
-.coinbase-affiliate-tile h3,
-.coinbase-affiliate-tile h4,
-.coinbase-affiliate-tile h5,
-.coinbase-affiliate-tile h6,
-.crypto-article h1,
-.crypto-article h2,
-.crypto-article h3,
-.crypto-article h4,
-.crypto-article h5,
-.crypto-article h6 {
-  color: var(--text-primary);
-}
-
-/* Ensure paragraphs and lists are visible */
-.coinbase-affiliate-tile p,
-.coinbase-affiliate-tile li,
-.coinbase-affiliate-tile td,
-.crypto-article p,
-.crypto-article li,
-.crypto-article td {
-  color: var(--text-secondary);
-}
-
-/* Strong/bold text gets slightly brighter */
-.coinbase-affiliate-tile strong,
-.crypto-article strong {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-/* Ordered and unordered lists styling */
-.coinbase-affiliate-tile ol,
-.coinbase-affiliate-tile ul,
-.crypto-article ol,
-.crypto-article ul {
-  color: var(--text-secondary);
-  padding-left: var(--space-6);
-  margin: var(--space-4) 0;
-}
-
-.coinbase-affiliate-tile ol li,
-.coinbase-affiliate-tile ul li,
-.crypto-article ol li,
-.crypto-article ul li {
-  margin-bottom: var(--space-2);
-  line-height: 1.7;
-}
-
-/* =========================
-   MODERN PAGE HEADER (Enhanced Typography)
-   ========================= */
-.ltc_page_header,
-.crypto-article .page-header {
-  padding: clamp(var(--space-8), 4vw, var(--space-16)) 0;
-  margin-bottom: clamp(var(--space-4), 2vw, var(--space-8));
-}
-
-.ltc_page_header h1,
-.crypto-article .page-header h1 {
-  margin: 0 0 var(--space-3);
-  font-size: var(--text-4xl);
-  font-weight: 800;
-  line-height: 1.1;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  font-family: var(--font-display);
-  text-shadow: 0 0 30px rgba(252,196,25,0.15);
-  position: relative;
-}
-
-.ltc_page_header p,
-.crypto-article .page-header p {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: var(--text-lg);
-  line-height: 1.7;
-  max-width: 65ch;
-}
-
-/* =========================
-   MODERN MAIN CARD / TILE (Enhanced Glassmorphism)
-   ========================= */
-.coinbase-affiliate-tile .main-card-container,
-.crypto-article .main-card-container,
-.ltc_card {
-  position: relative;
-  background: linear-gradient(135deg, var(--glass-white-hover) 0%, var(--glass-white) 100%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  padding: clamp(var(--space-6), 4vw, var(--space-10));
-  transition:
-    transform var(--transition-smooth),
-    box-shadow var(--transition-smooth),
-    border-color var(--transition-base),
-    background var(--transition-base);
-  isolation: isolate;
-}
-
-/* Modern layered hover effect */
-.coinbase-affiliate-tile .main-card-container::before,
-.crypto-article .main-card-container::before,
-.ltc_card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(252,196,25,0.08) 0%,
-    transparent 50%);
-  opacity: 0;
-  transition: opacity var(--transition-smooth);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Enhanced hover with 3D transform */
-.coinbase-affiliate-tile .main-card-container:hover,
-.crypto-article .main-card-container:hover,
-.ltc_card:hover {
-  transform: translateY(-8px) scale(1.01);
-  border-color: var(--glass-border-hover);
-  box-shadow: var(--shadow-2xl), 0 0 60px rgba(252,196,25,0.12);
-  background: linear-gradient(135deg, var(--glass-white-active) 0%, var(--glass-white-hover) 100%);
-}
-
-.coinbase-affiliate-tile .main-card-container:hover::before,
-.crypto-article .main-card-container:hover::before,
-.ltc_card:hover::before {
-  opacity: 1;
-}
-
-/* Active state */
-.coinbase-affiliate-tile .main-card-container:active,
-.crypto-article .main-card-container:active,
-.ltc_card:active {
-  transform: translateY(-4px) scale(0.99);
-  transition-duration: 150ms;
-}
-
-/* Modern shine effect on hover */
-.coinbase-affiliate-tile .main-card-container::after,
-.crypto-article .main-card-container::after,
-.ltc_card::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  bottom: -50%;
-  left: -50%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.08) 50%,
-    transparent 70%
-  );
-  transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  transition: transform var(--transition-slow);
-  pointer-events: none;
-}
-
-.coinbase-affiliate-tile .main-card-container:hover::after,
-.crypto-article .main-card-container:hover::after,
-.ltc_card:hover::after {
-  transform: translateX(100%) translateY(100%) rotate(45deg);
-}
-
-/* Accessibility: reduce effects on reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .coinbase-affiliate-tile .main-card-container,
-  .crypto-article .main-card-container,
-  .ltc_card {
-    transform: none !important;
-  }
-
-  .coinbase-affiliate-tile .main-card-container::after,
-  .crypto-article .main-card-container::after,
-  .ltc_card::after {
-    display: none;
-  }
-}
-
-/* =========================
-   MODERN CTA BUTTON (Enhanced Micro-interactions)
-   ========================= */
-.coinbase-affiliate-tile .cta-button,
-.crypto-article .bookie-cta-button,
-.ltc_cta_button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: clamp(var(--space-3), 2.5vw, var(--space-4)) clamp(var(--space-6), 5vw, var(--space-10));
-  border-radius: var(--radius-lg);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  border: none;
-  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-700) 100%);
-  color: var(--bg-primary);
-  text-decoration: none;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    filter var(--transition-base),
-    background var(--transition-base);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Animated gradient on hover */
-.coinbase-affiliate-tile .cta-button:hover,
-.crypto-article .bookie-cta-button:hover,
-.ltc_cta_button:hover {
-  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
-}
-
-/* Modern pulse animation (stops when hovered) */
-@keyframes modernCtaPulse {
-  0%, 100% {
-    box-shadow:
-      0 4px 24px rgba(252,196,25,0.35),
-      0 2px 8px rgba(252,196,25,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
-  50% {
-    box-shadow:
-      0 8px 32px rgba(252,196,25,0.50),
-      0 4px 12px rgba(252,196,25,0.35),
-      inset 0 1px 0 rgba(255,255,255,0.25);
-  }
-}
-
-.coinbase-affiliate-tile .cta-button:not(:hover):not(:active),
-.crypto-article .bookie-cta-button:not(:hover):not(:active),
-.ltc_cta_button:not(:hover):not(:active) {
-  animation: modernCtaPulse 3s ease-in-out infinite;
-}
-
-/* Enhanced hover with 3D effect */
-.coinbase-affiliate-tile .cta-button:hover,
-.crypto-article .bookie-cta-button:hover,
-.ltc_cta_button:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow:
-    0 12px 40px rgba(252,196,25,0.60),
-    0 6px 16px rgba(252,196,25,0.40),
-    inset 0 1px 0 rgba(255,255,255,0.35),
-    inset 0 -1px 0 rgba(0,0,0,0.1);
-  filter: brightness(1.1);
-}
-
-/* Active/pressed state */
-.coinbase-affiliate-tile .cta-button:active,
-.crypto-article .bookie-cta-button:active,
-.ltc_cta_button:active {
-  transform: translateY(-1px) scale(0.98);
-  transition-duration: 100ms;
-  box-shadow:
-    0 4px 16px rgba(252,196,25,0.40),
-    inset 0 2px 4px rgba(0,0,0,0.15);
-}
-
-/* Modern shimmer effect */
-.coinbase-affiliate-tile .cta-button::after,
-.crypto-article .bookie-cta-button::after,
-.ltc_cta_button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent
-  );
-  transition: left var(--transition-slow);
-  pointer-events: none;
-}
-
-.coinbase-affiliate-tile .cta-button:hover::after,
-.crypto-article .bookie-cta-button:hover::after,
-.ltc_cta_button:hover::after {
-  left: 100%;
-}
-
-/* Focus state for accessibility */
-.coinbase-affiliate-tile .cta-button:focus-visible,
-.crypto-article .bookie-cta-button:focus-visible,
-.ltc_cta_button:focus-visible {
-  outline: 3px solid var(--primary-gold);
-  outline-offset: 4px;
-}
-
-/* =========================
-   MODERN STATS BAR / TRUST SIGNALS
-   ========================= */
-.coinbase-affiliate-tile .quick-stats-bar,
-.crypto-article .bookie-stats-bar,
-.ltc_stats_bar {
-  position: relative;
-  background:
-    linear-gradient(90deg,
-      rgba(252,196,25,0.04) 0%,
-      rgba(252,196,25,0.02) 50%,
-      rgba(252,196,25,0.04) 100%);
-  border-top: 1px solid var(--glass-border);
-  border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur-subtle);
-  -webkit-backdrop-filter: var(--blur-subtle);
-  padding: clamp(var(--space-3), 2.5vw, var(--space-5));
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: clamp(var(--space-3), 2.5vw, var(--space-4));
-  align-items: center;
-  overflow: hidden;
-}
-
-/* Animated gradient background */
-.coinbase-affiliate-tile .quick-stats-bar::before,
-.crypto-article .bookie-stats-bar::before,
-.ltc_stats_bar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(252,196,25,0.05) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: statsShimmer 8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes statsShimmer {
-  0%, 100% { transform: translateX(-100%); }
-  50% { transform: translateX(100%); }
-}
-
-/* Individual stat items */
-.coinbase-affiliate-tile .stat-item,
-.crypto-article .bookie-stat-item,
-.ltc_stats_bar .stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  text-align: center;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: background var(--transition-fast);
-}
-
-.coinbase-affiliate-tile .stat-item:hover,
-.crypto-article .bookie-stat-item:hover,
-.ltc_stats_bar .stat-item:hover {
-  background: var(--glass-white);
-}
-
-/* Stat labels */
-.coinbase-affiliate-tile .stat-label,
-.crypto-article .bookie-stat-label,
-.ltc_stats_bar .stat-label {
-  font-size: var(--text-xs);
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-}
-
-/* Enhanced stat values with glow effects */
-.coinbase-affiliate-tile .stat-value,
-.crypto-article .bookie-stat-value,
-.ltc_stats_bar .stat-value {
-  font-size: var(--text-lg);
-  font-weight: 800;
-  font-family: var(--font-display);
-  transition: transform var(--transition-fast);
-}
-
-.coinbase-affiliate-tile .stat-item:hover .stat-value,
-.crypto-article .bookie-stat-item:hover .stat-value,
-.ltc_stats_bar .stat-item:hover .stat-value {
-  transform: scale(1.1);
-}
-
-/* Positive values - Success glow */
-.coinbase-affiliate-tile .stat-value.positive,
-.crypto-article .bookie-stat-value.positive,
-.ltc_stats_bar .stat-value.positive {
-  color: var(--success-light);
-  text-shadow:
-    0 0 16px rgba(16,185,129,0.25),
-    0 0 8px rgba(16,185,129,0.15);
-}
-
-/* Rating values - Gold glow */
-.coinbase-affiliate-tile .stat-value.rating,
-.crypto-article .bookie-stat-value.rating,
-.ltc_stats_bar .stat-value.rating {
-  color: var(--primary-gold);
-  text-shadow:
-    0 0 16px rgba(252,196,25,0.30),
-    0 0 8px rgba(252,196,25,0.20);
-}
-
-/* Info values */
-.coinbase-affiliate-tile .stat-value.info,
-.crypto-article .bookie-stat-value.info,
-.ltc_stats_bar .stat-value.info {
-  color: var(--info-light);
-  text-shadow:
-    0 0 16px rgba(14,165,233,0.25),
-    0 0 8px rgba(14,165,233,0.15);
-}
-
-/* =========================
-   MODERN TABS SYSTEM (Enhanced UX)
-   ========================= */
-.coinbase-affiliate-tile .tab-container,
-.crypto-article .bookie-tab-container,
-.ltc_tabs {
-  display: flex;
-  gap: var(--space-2);
-  border-bottom: 2px solid var(--glass-border);
-  margin-bottom: var(--space-6);
-  position: relative;
-}
-
-.coinbase-affiliate-tile .tab-button,
-.crypto-article .bookie-tab-button,
-.ltc_tabs .tab-button {
-  position: relative;
-  background: transparent;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  padding: clamp(var(--space-3), 2vw, var(--space-4)) clamp(var(--space-4), 3vw, var(--space-6));
-  border: none;
-  cursor: pointer;
-  transition:
-    color var(--transition-base),
-    background var(--transition-base),
-    transform var(--transition-fast);
-  font-size: var(--text-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-  isolation: isolate;
-}
-
-/* Hover state */
-.coinbase-affiliate-tile .tab-button:hover,
-.crypto-article .bookie-tab-button:hover,
-.ltc_tabs .tab-button:hover {
-  color: var(--text-secondary);
-  background: var(--glass-white);
-}
-
-/* Active tab styling */
-.coinbase-affiliate-tile .tab-button.active,
-.crypto-article .bookie-tab-button.active,
-.ltc_tabs .tab-button.active {
-  color: var(--primary-gold);
-  background: var(--glass-white-hover);
-  font-weight: 700;
-}
-
-/* Modern animated underline indicator */
-.coinbase-affiliate-tile .tab-button::before,
-.crypto-article .bookie-tab-button::before,
-.ltc_tabs .tab-button::before {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 3px;
-  width: 0;
-  background: linear-gradient(90deg, var(--gold-400), var(--gold-600));
-  border-radius: var(--radius-full);
-  transition: width var(--transition-spring);
-  box-shadow: 0 0 12px rgba(252,196,25,0.5);
-}
-
-.coinbase-affiliate-tile .tab-button.active::before,
-.crypto-article .bookie-tab-button.active::before,
-.ltc_tabs .tab-button.active::before {
-  width: calc(100% - var(--space-4));
-}
-
-/* Glow effect on active tab */
-.coinbase-affiliate-tile .tab-button.active::after,
-.crypto-article .bookie-tab-button.active::after,
-.ltc_tabs .tab-button.active::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center bottom,
-    rgba(252,196,25,0.10) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Focus state for accessibility */
-.coinbase-affiliate-tile .tab-button:focus-visible,
-.crypto-article .bookie-tab-button:focus-visible,
-.ltc_tabs .tab-button:focus-visible {
-  outline: 2px solid var(--primary-gold);
-  outline-offset: 2px;
-}
-
-/* =========================
-   MODERN COMPARISON TABLE
-   ========================= */
-.ltc_comparison_20251107_1515,
-.crypto-article .comparison-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: var(--glass-white);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  display: block;
-  overflow-x: auto;
-}
-
-/* Modern table header with gradient */
-.ltc_comparison_20251107_1515 thead,
-.crypto-article .comparison-table thead {
-  background:
-    linear-gradient(135deg,
-      rgba(252,196,25,0.18) 0%,
-      rgba(252,196,25,0.10) 50%,
-      rgba(252,196,25,0.15) 100%);
-  backdrop-filter: var(--blur-subtle);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.ltc_comparison_20251107_1515 th,
-.crypto-article .comparison-table th {
-  padding: clamp(var(--space-3), 2.5vw, var(--space-5)) clamp(var(--space-4), 3vw, var(--space-6));
-  color: var(--primary-gold);
-  font-weight: 700;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: var(--text-xs);
-  letter-spacing: 0.1em;
-  border-right: 1px solid rgba(252,196,25,0.15);
-  text-align: left;
-  white-space: nowrap;
-  text-shadow: 0 0 8px rgba(252,196,25,0.15);
-}
-
-.ltc_comparison_20251107_1515 th:last-child,
-.crypto-article .comparison-table th:last-child {
-  border-right: none;
-}
-
-/* Modern table cells */
-.ltc_comparison_20251107_1515 td,
-.crypto-article .comparison-table td {
-  padding: clamp(var(--space-3), 2vw, var(--space-4)) clamp(var(--space-4), 3vw, var(--space-6));
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  border-right: 1px solid var(--glass-border-subtle);
-  border-bottom: 1px solid var(--glass-border-subtle);
-}
-
-.ltc_comparison_20251107_1515 td:last-child,
-.crypto-article .comparison-table td:last-child {
-  border-right: none;
-}
-
-/* Enhanced table rows with modern hover */
-.ltc_comparison_20251107_1515 tbody tr,
-.crypto-article .comparison-table tbody tr {
-  background: rgba(255,255,255,0.02);
-  transition:
-    background var(--transition-fast),
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
-  position: relative;
-}
-
-.ltc_comparison_20251107_1515 tbody tr::before,
-.crypto-article .comparison-table tbody tr::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background: var(--primary-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transition-base);
-}
-
-.ltc_comparison_20251107_1515 tbody tr:hover,
-.crypto-article .comparison-table tbody tr:hover {
-  background:
-    linear-gradient(90deg,
-      rgba(252,196,25,0.08) 0%,
-      rgba(252,196,25,0.04) 50%,
-      rgba(252,196,25,0.02) 100%);
-  transform: translateX(4px);
-  box-shadow: 0 4px 24px rgba(252,196,25,0.12);
-}
-
-.ltc_comparison_20251107_1515 tbody tr:hover::before,
-.crypto-article .comparison-table tbody tr:hover::before {
-  transform: scaleX(1);
-}
-
-.ltc_comparison_20251107_1515 tbody tr:last-child td,
-.crypto-article .comparison-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Zebra striping for better readability */
-.ltc_comparison_20251107_1515 tbody tr:nth-child(even),
-.crypto-article .comparison-table tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.01);
-}
-
-/* =========================
-   MODERN PROS / CONS BLOCKS
-   ========================= */
-.ltc_proscons_20251107_1522 .pros-section,
-.crypto-article .bookie-pros-section,
-.ltc_pros_section {
-  position: relative;
-  background:
-    linear-gradient(135deg,
-      rgba(16,185,129,0.08) 0%,
-      rgba(16,185,129,0.03) 50%,
-      rgba(16,185,129,0.05) 100%);
-  border: 1px solid rgba(16,185,129,0.25);
-  border-left: 5px solid var(--success);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-5), 3.5vw, var(--space-8));
-  margin-bottom: var(--space-6);
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    border-left-width var(--transition-fast);
-  overflow: hidden;
-}
-
-/* Icon or decorative element */
-.ltc_proscons_20251107_1522 .pros-section::before,
-.crypto-article .bookie-pros-section::before,
-.ltc_pros_section::before {
-  content: "✓";
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  font-size: var(--text-3xl);
-  color: var(--success);
-  opacity: 0.15;
-  font-weight: 800;
-}
-
-.ltc_proscons_20251107_1522 .cons-section,
-.crypto-article .bookie-cons-section,
-.ltc_cons_section {
-  position: relative;
-  background:
-    linear-gradient(135deg,
-      rgba(239,68,68,0.08) 0%,
-      rgba(239,68,68,0.03) 50%,
-      rgba(239,68,68,0.05) 100%);
-  border: 1px solid rgba(239,68,68,0.25);
-  border-left: 5px solid var(--error);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-5), 3.5vw, var(--space-8));
-  margin-bottom: var(--space-6);
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    border-left-width var(--transition-fast);
-  overflow: hidden;
-}
-
-.ltc_proscons_20251107_1522 .cons-section::before,
-.crypto-article .bookie-cons-section::before,
-.ltc_cons_section::before {
-  content: "✕";
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  font-size: var(--text-3xl);
-  color: var(--error);
-  opacity: 0.15;
-  font-weight: 800;
-}
-
-/* Enhanced hover with slide and glow */
-.ltc_proscons_20251107_1522 .pros-section:hover,
-.crypto-article .bookie-pros-section:hover,
-.ltc_pros_section:hover {
-  transform: translateX(6px);
-  box-shadow: 0 8px 32px rgba(16,185,129,0.18), -5px 0 0 0 var(--success);
-  border-left-width: 8px;
-  background:
-    linear-gradient(135deg,
-      rgba(16,185,129,0.12) 0%,
-      rgba(16,185,129,0.05) 50%,
-      rgba(16,185,129,0.08) 100%);
-}
-
-.ltc_proscons_20251107_1522 .cons-section:hover,
-.crypto-article .bookie-cons-section:hover,
-.ltc_cons_section:hover {
-  transform: translateX(6px);
-  box-shadow: 0 8px 32px rgba(239,68,68,0.18), -5px 0 0 0 var(--error);
-  border-left-width: 8px;
-  background:
-    linear-gradient(135deg,
-      rgba(239,68,68,0.12) 0%,
-      rgba(239,68,68,0.05) 50%,
-      rgba(239,68,68,0.08) 100%);
-}
-
-/* Heading styles for pros/cons */
-.ltc_proscons_20251107_1522 .pros-section h3,
-.crypto-article .bookie-pros-section h3,
-.ltc_pros_section h3 {
-  color: var(--success-light);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  margin-bottom: var(--space-3);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.ltc_proscons_20251107_1522 .cons-section h3,
-.crypto-article .bookie-cons-section h3,
-.ltc_cons_section h3 {
-  color: var(--error-light);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  margin-bottom: var(--space-3);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* List styling inside pros/cons */
-.ltc_proscons_20251107_1522 ul,
-.crypto-article .bookie-pros-section ul,
-.crypto-article .bookie-cons-section ul,
-.ltc_pros_section ul,
-.ltc_cons_section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.ltc_proscons_20251107_1522 li,
-.crypto-article .bookie-pros-section li,
-.crypto-article .bookie-cons-section li,
-.ltc_pros_section li,
-.ltc_cons_section li {
-  padding-left: var(--space-6);
-  margin-bottom: var(--space-2);
-  position: relative;
-  line-height: 1.6;
-}
-
-.ltc_proscons_20251107_1522 .pros-section li::before,
-.crypto-article .bookie-pros-section li::before,
-.ltc_pros_section li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--success);
-  font-weight: 700;
-}
-
-.ltc_proscons_20251107_1522 .cons-section li::before,
-.crypto-article .bookie-cons-section li::before,
-.ltc_cons_section li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--error);
-  font-weight: 700;
-}
-
-/* =========================
-   MODERN SUMMARY / INFO BOXES
-   ========================= */
-.crypto-article .summary-box,
-.ltc_summary_box {
-  position: relative;
-  background:
-    linear-gradient(135deg,
-      rgba(252,196,25,0.15) 0%,
-      rgba(252,196,25,0.08) 50%,
-      rgba(252,196,25,0.10) 100%);
-  border: 2px solid rgba(252,196,25,0.25);
-  border-radius: var(--radius-2xl);
-  padding: clamp(var(--space-6), 5vw, var(--space-12));
-  box-shadow: var(--shadow-xl), 0 0 80px rgba(252,196,25,0.08);
-  margin-bottom: var(--space-8);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Animated floating radial highlight */
-.crypto-article .summary-box::before,
-.ltc_summary_box::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(252,196,25,0.08) 0%,
-    rgba(252,196,25,0.04) 30%,
-    transparent 50%
-  );
-  animation: modernFloat 25s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes modernFloat {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translate(-10%, -12%) rotate(90deg) scale(1.05);
-  }
-  50% {
-    transform: translate(12%, -15%) rotate(180deg) scale(0.95);
-  }
-  75% {
-    transform: translate(-15%, 10%) rotate(270deg) scale(1.02);
-  }
-}
-
-/* Summary box title */
-.crypto-article .summary-box h2,
-.ltc_summary_box h2 {
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  color: var(--primary-gold);
-  margin-bottom: var(--space-4);
-  font-family: var(--font-display);
-  text-shadow: 0 0 20px rgba(252,196,25,0.20);
-}
-
-/* Modern summary items with enhanced interactions */
-.crypto-article .summary-item,
-.ltc_summary_item {
-  position: relative;
-  background: var(--glass-white);
-  border: 1px solid var(--glass-border);
-  border-left: 5px solid var(--primary-gold);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-4), 3.5vw, var(--space-6));
-  margin-bottom: var(--space-4);
-  transition:
-    transform var(--transition-smooth),
-    box-shadow var(--transition-smooth),
-    border-left-width var(--transition-fast),
-    background var(--transition-base);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Shimmer effect on hover */
-.crypto-article .summary-item::before,
-.ltc_summary_item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(252,196,25,0.15) 50%,
-    transparent 100%
-  );
-  transition: left var(--transition-slow);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.crypto-article .summary-item:hover::before,
-.ltc_summary_item:hover::before {
-  left: 150%;
-}
-
-/* Enhanced hover state */
-.crypto-article .summary-item:hover,
-.ltc_summary_item:hover {
-  transform: translateY(-6px) translateX(4px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(252,196,25,0.15), -5px 0 0 0 var(--primary-gold);
-  border-left-width: 8px;
-  background: var(--glass-white-hover);
-}
-
-/* Summary item headings */
-.crypto-article .summary-item h3,
-.ltc_summary_item h3 {
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
-}
-
-.crypto-article .summary-item p,
-.ltc_summary_item p {
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* =========================
-   MODERN FAQ / ACCORDION SYSTEM
-   ========================= */
-.crypto-article .faq-item,
-.ltc_faq_item {
-  position: relative;
-  background: var(--glass-white);
-  border: 1px solid var(--glass-border);
-  border-left: 5px solid var(--primary-gold);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-5), 4vw, var(--space-8));
-  margin: clamp(var(--space-4), 3.5vw, var(--space-6)) 0;
-  box-shadow: var(--shadow-md);
-  transition:
-    transform var(--transition-smooth),
-    box-shadow var(--transition-smooth),
-    border-left-width var(--transition-fast),
-    background var(--transition-base);
-  cursor: pointer;
-  isolation: isolate;
-}
-
-/* FAQ question styling */
-.crypto-article .faq-item .question,
-.ltc_faq_item .question {
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--text-primary);
-  padding-right: var(--space-12);
-  position: relative;
-  user-select: none;
-}
-
-/* Modern chevron indicator */
-.crypto-article .faq-item .question::after,
-.ltc_faq_item .question::after {
-  content: "→";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  font-size: var(--text-2xl);
-  color: var(--primary-gold);
-  transition:
-    transform var(--transition-spring),
-    opacity var(--transition-base);
-  opacity: 0.6;
-}
-
-/* Hover state */
-.crypto-article .faq-item:hover,
-.ltc_faq_item:hover {
-  transform: translateX(8px);
-  box-shadow: var(--shadow-xl), 0 0 50px rgba(252,196,25,0.10);
-  border-left-width: 8px;
-  background: var(--glass-white-hover);
-}
-
-.crypto-article .faq-item:hover .question::after,
-.ltc_faq_item:hover .question::after {
-  opacity: 1;
-  transform: translateY(-50%) rotate(90deg) translateX(4px);
-}
-
-/* Glow effect on hover */
-.crypto-article .faq-item::before,
-.ltc_faq_item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 0% 50%,
-    rgba(252,196,25,0.08) 0%,
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.crypto-article .faq-item:hover::before,
-.ltc_faq_item:hover::before {
-  opacity: 1;
-}
-
-/* FAQ answer styling */
-.crypto-article .faq-item .answer,
-.ltc_faq_item .answer {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  line-height: 1.7;
-  transition:
-    max-height var(--transition-smooth),
-    opacity var(--transition-base),
-    padding var(--transition-base);
-}
-
-/* Open state */
-.crypto-article .faq-item.open,
-.ltc_faq_item.open {
-  border-left-width: 8px;
-  background: var(--glass-white-hover);
-}
-
-.crypto-article .faq-item.open .question::after,
-.ltc_faq_item.open .question::after {
-  transform: translateY(-50%) rotate(-90deg);
-  opacity: 1;
-}
-
-.crypto-article .faq-item.open .answer,
-.ltc_faq_item.open .answer {
-  max-height: 1000px; /* JS can set exact height for smoother animation */
-  opacity: 1;
-  padding-top: var(--space-4);
-  margin-top: var(--space-3);
-  border-top: 1px solid var(--glass-border);
-}
-
-/* Focus state for accessibility */
-.crypto-article .faq-item:focus-visible,
-.ltc_faq_item:focus-visible {
-  outline: 3px solid var(--primary-gold);
-  outline-offset: 3px;
-}
-
-/* =========================
-   MODERN SKELETON LOADER
-   ========================= */
-@keyframes modernShimmer {
-  0% {
-    background-position: -1200px 0;
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    background-position: 1200px 0;
-    opacity: 0.4;
-  }
-}
-
-.skeleton-loader {
-  position: relative;
-  background:
-    linear-gradient(
-      90deg,
-      var(--glass-white) 0%,
-      rgba(252,196,25,0.08) 25%,
-      rgba(252,196,25,0.12) 50%,
-      rgba(252,196,25,0.08) 75%,
-      var(--glass-white) 100%
-    );
-  background-size: 1200px 100%;
-  animation: modernShimmer 2.5s ease-in-out infinite;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-/* Skeleton variants */
-.skeleton-loader.skeleton-text {
-  height: 1em;
-  margin-bottom: var(--space-2);
-  border-radius: var(--radius-sm);
-}
-
-.skeleton-loader.skeleton-title {
-  height: 2em;
-  margin-bottom: var(--space-4);
-  border-radius: var(--radius-md);
-}
-
-.skeleton-loader.skeleton-card {
-  height: 200px;
-  border-radius: var(--radius-xl);
-}
-
-.skeleton-loader.skeleton-circle {
-  border-radius: var(--radius-full);
-  aspect-ratio: 1;
-}
-
-/* =========================
-   ENHANCED ACCESSIBILITY & FOCUS STATES
-   ========================= */
-
-/* Modern focus ring system */
-*:focus {
-  outline: none;
-}
-
-*:focus-visible {
-  outline: 3px solid var(--primary-gold);
-  outline-offset: 3px;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 0 0 6px rgba(252,196,25,0.15);
-  transition: outline-offset var(--transition-fast);
-}
-
-/* Skip to content link (for keyboard navigation) */
-.skip-to-content {
-  position: absolute;
-  top: -100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--primary-gold);
-  color: var(--bg-primary);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  font-weight: 700;
-  text-decoration: none;
-  z-index: var(--z-tooltip);
-  transition: top var(--transition-base);
-}
-
-.skip-to-content:focus {
-  top: var(--space-4);
-}
-
-/* Screen reader only content */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: more) {
-  :root {
-    --glass-border: rgba(255,255,255,0.30);
-    --glass-border-hover: rgba(255,255,255,0.50);
-    --text-primary: rgba(255,255,255,1);
-    --text-secondary: rgba(255,255,255,0.95);
-    --text-tertiary: rgba(255,255,255,0.85);
-  }
-
-  .coinbase-affiliate-tile .cta-button,
-  .crypto-article .bookie-cta-button,
-  .ltc_cta_button {
-    border: 3px solid var(--primary-gold);
+.b3i-content h1 {
+    font-size: 2.5rem;
     font-weight: 800;
-  }
-
-  .glass-effect,
-  .glass-effect-subtle,
-  .glass-effect-strong {
-    border: 2px solid var(--glass-border);
-  }
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    line-height: 1.2;
 }
 
-/* Dark mode detection (system preference) */
-@media (prefers-color-scheme: dark) {
-  /* Already optimized for dark mode by default */
-  :root {
-    color-scheme: dark;
-  }
+.b3i-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 50px 0 25px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #FCC419;
+}
+
+.b3i-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 35px 0 20px 0;
+}
+
+.b3i-content h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 25px 0 15px 0;
 }
 
 /* =========================
-   MODERN RESPONSIVE DESIGN & CONTAINER QUERIES
+   TEXT ELEMENTS
    ========================= */
-
-/* Container query setup for adaptive components */
-.coinbase-affiliate-tile,
-.crypto-article,
-[class^="ltc_"] {
-  container-type: inline-size;
-  container-name: component;
+.b3i-content p {
+    margin-bottom: 20px;
+    color: #2d3748;
 }
 
-/* Container-based responsive adjustments */
-@container component (max-width: 900px) {
-  .coinbase-affiliate-tile .tab-container,
-  .crypto-article .bookie-tab-container,
-  .ltc_tabs {
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .coinbase-affiliate-tile .quick-stats-bar,
-  .crypto-article .bookie-stats-bar,
-  .ltc_stats_bar {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.b3i-content strong {
+    color: #1a1a1a;
+    font-weight: 600;
 }
 
-@container component (max-width: 600px) {
-  .coinbase-affiliate-tile .quick-stats-bar,
-  .crypto-article .bookie-stats-bar,
-  .ltc_stats_bar {
-    grid-template-columns: 1fr;
-  }
+.b3i-content ul,
+.b3i-content ol {
+    margin-bottom: 20px;
+    padding-left: 30px;
 }
 
-/* Mobile-first responsive breakpoints */
-@media (max-width: 1024px) {
-  :root {
-    --blur-strong: blur(14px);
-    --blur-medium: blur(10px);
-    --blur-subtle: blur(6px);
-  }
+.b3i-content li {
+    margin-bottom: 10px;
+    color: #2d3748;
 }
 
+.b3i-content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.b3i-content a:hover {
+    text-decoration: underline;
+    color: #1e4a7a;
+}
+
+/* =========================
+   ARTICLE HEADER
+   ========================= */
+.b3i-article-header {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #FCC419;
+}
+
+.b3i-intro {
+    font-size: 1.15rem;
+    color: #2d3748;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* =========================
+   SUMMARY BOX (Dark Background Section)
+   ========================= */
+.b3i-summary-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    color: #ffffff;
+}
+
+.b3i-summary-box h2 {
+    color: #FCC419;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    margin-top: 0;
+    border-bottom: none;
+}
+
+.b3i-summary-box p {
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.b3i-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.b3i-summary-item {
+    background: rgba(252, 196, 25, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #FCC419;
+}
+
+.b3i-summary-item h3 {
+    color: #FCC419;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.b3i-summary-item p {
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* =========================
+   COMPARISON TABLES
+   ========================= */
+.b3i-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.b3i-comparison-table thead {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+}
+
+.b3i-comparison-table th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.b3i-comparison-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+.b3i-comparison-table tbody tr:hover {
+    background: #f7fafc;
+    transition: background 0.2s ease;
+}
+
+.b3i-rating {
+    color: #FCC419;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* =========================
+   VS TABLE (Feature Comparison)
+   ========================= */
+.b3i-vs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.b3i-vs-table thead th {
+    background: #2d3748;
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.b3i-vs-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.b3i-vs-table tbody td:first-child {
+    font-weight: 600;
+    background: #f7fafc;
+}
+
+.b3i-vs-table tbody tr:hover {
+    background: #f7fafc;
+}
+
+/* =========================
+   BOOKIE REVIEW CARDS
+   ========================= */
+.b3i-bookie-review {
+    background: #f7fafc;
+    border-left: 4px solid #FCC419;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.b3i-bookie-review h3 {
+    margin-top: 0;
+    color: #1a1a1a;
+}
+
+.b3i-bookie-review h4 {
+    color: #2d3748;
+    margin-top: 25px;
+    font-size: 1.1rem;
+}
+
+.b3i-bookie-review ul {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   INFO BOX (Stats Grid)
+   ========================= */
+.b3i-info-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.b3i-info-item {
+    padding: 10px;
+    background: #f7fafc;
+    border-radius: 6px;
+}
+
+.b3i-info-item strong {
+    display: block;
+    color: #4a5568;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.b3i-info-item span {
+    color: #1a1a1a;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* =========================
+   PRO TIP (Gold Highlight Box)
+   ========================= */
+.b3i-pro-tip {
+    background: linear-gradient(135deg, #FCC419 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 25px 0;
+    border-left: 4px solid #d97706;
+    box-shadow: 0 2px 8px rgba(252, 196, 25, 0.2);
+}
+
+.b3i-pro-tip strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+/* =========================
+   DID YOU KNOW BOX (Green Info)
+   ========================= */
+.b3i-did-you-know {
+    background: #e6f7ed;
+    border-left: 4px solid #38a169;
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 8px;
+}
+
+.b3i-did-you-know strong {
+    color: #2f855a;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.b3i-did-you-know p {
+    color: #2d3748;
+    margin: 0;
+}
+
+/* =========================
+   BONUS EXAMPLE
+   ========================= */
+.b3i-bonus-example {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.b3i-bonus-example h4 {
+    margin-top: 0;
+    color: #1a1a1a;
+}
+
+.b3i-bonus-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.b3i-bonus-detail-item {
+    padding: 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+}
+
+.b3i-bonus-detail-item strong {
+    display: block;
+    color: #4a5568;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+/* =========================
+   RESPONSIBLE GAMBLING LISTS
+   ========================= */
+.b3i-responsible-list {
+    background: #f7fafc;
+    padding: 25px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.b3i-responsible-list h4 {
+    margin-top: 0;
+    color: #1a1a1a;
+}
+
+.b3i-responsible-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.b3i-responsible-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.b3i-responsible-list li:last-child {
+    border-bottom: none;
+}
+
+.b3i-do-list {
+    background: #e6f7ed;
+    border-left: 4px solid #38a169;
+}
+
+.b3i-dont-list {
+    background: #fff5f5;
+    border-left: 4px solid #e53e3e;
+}
+
+/* =========================
+   FAQ SECTION
+   ========================= */
+.b3i-faq-section {
+    margin: 50px 0;
+}
+
+.b3i-faq-item {
+    background: #f7fafc;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 4px solid #FCC419;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.b3i-faq-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+.b3i-faq-item h3 {
+    margin-top: 0;
+    color: #1a1a1a;
+    font-size: 1.3rem;
+}
+
+.b3i-faq-item p {
+    color: #2d3748;
+}
+
+/* =========================
+   REFERENCES
+   ========================= */
+.b3i-references {
+    background: #f7fafc;
+    padding: 30px;
+    margin: 50px 0 30px 0;
+    border-radius: 8px;
+}
+
+.b3i-references h2 {
+    margin-top: 0;
+}
+
+.b3i-references ol {
+    padding-left: 20px;
+}
+
+.b3i-references li {
+    margin-bottom: 15px;
+    color: #2d3748;
+}
+
+/* =========================
+   DISCLAIMER
+   ========================= */
+.b3i-disclaimer {
+    background: #fff5e6;
+    border-left: 4px solid #f59e0b;
+    padding: 25px;
+    margin: 40px 0;
+    border-radius: 8px;
+}
+
+.b3i-disclaimer h3 {
+    margin-top: 0;
+    color: #c05621;
+}
+
+.b3i-disclaimer p {
+    color: #744210;
+    font-size: 0.95rem;
+}
+
+/* =========================
+   AUTHOR SECTION
+   ========================= */
+.b3i-author-section {
+    background: #f7fafc;
+    padding: 30px;
+    margin: 40px 0;
+    border-radius: 8px;
+    border-top: 3px solid #FCC419;
+}
+
+.b3i-author-section h3 {
+    margin-top: 0;
+}
+
+.b3i-author-section p {
+    color: #2d3748;
+}
+
+/* =========================
+   UTILITY CLASSES
+   ========================= */
+.b3i-source-note {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.b3i-text-gold {
+    color: #FCC419;
+}
+
+.b3i-text-center {
+    text-align: center;
+}
+
+.b3i-mt-small {
+    margin-top: 10px;
+}
+
+.b3i-mt-medium {
+    margin-top: 20px;
+}
+
+.b3i-mt-large {
+    margin-top: 40px;
+}
+
+.b3i-mb-small {
+    margin-bottom: 10px;
+}
+
+.b3i-mb-medium {
+    margin-bottom: 20px;
+}
+
+.b3i-mb-large {
+    margin-bottom: 40px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
 @media (max-width: 768px) {
-  :root {
-    --blur-strong: blur(12px);
-    --blur-medium: blur(8px);
-    --blur-subtle: blur(4px);
+    .b3i-content {
+        padding: 15px;
+    }
 
-    /* Adjust spacing for mobile */
-    --space-4: 0.875rem;
-    --space-6: 1.25rem;
-    --space-8: 1.75rem;
-    --space-10: 2rem;
-  }
+    .b3i-content h1 {
+        font-size: 1.8rem;
+    }
 
-  /* Reduce blur effects on mobile for better performance */
-  .glass-effect-strong {
-    backdrop-filter: var(--blur-medium);
-    -webkit-backdrop-filter: var(--blur-medium);
-  }
+    .b3i-content h2 {
+        font-size: 1.5rem;
+        margin: 35px 0 20px 0;
+    }
 
-  .glass-effect {
-    backdrop-filter: var(--blur-subtle);
-    -webkit-backdrop-filter: var(--blur-subtle);
-  }
+    .b3i-content h3 {
+        font-size: 1.3rem;
+    }
 
-  /* Ensure touch targets are at least 44x44px (WCAG AAA) */
-  .coinbase-affiliate-tile .cta-button,
-  .crypto-article .bookie-cta-button,
-  .ltc_cta_button,
-  .coinbase-affiliate-tile .tab-button,
-  .crypto-article .bookie-tab-button,
-  .ltc_tabs .tab-button {
-    min-height: 48px;
-    min-width: 48px;
-  }
+    .b3i-summary-grid {
+        grid-template-columns: 1fr;
+    }
 
-  /* Reduce card padding on mobile */
-  .coinbase-affiliate-tile .main-card-container,
-  .crypto-article .main-card-container,
-  .ltc_card {
-    padding: clamp(var(--space-4), 3.5vw, var(--space-6));
-  }
+    .b3i-comparison-table {
+        font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+    }
 
-  /* Simplify shadows on mobile for better performance */
-  .coinbase-affiliate-tile .main-card-container,
-  .crypto-article .main-card-container,
-  .ltc_card {
-    box-shadow: var(--shadow-md);
-  }
+    .b3i-comparison-table th,
+    .b3i-comparison-table td {
+        padding: 10px 8px;
+    }
 
-  .coinbase-affiliate-tile .main-card-container:hover,
-  .crypto-article .main-card-container:hover,
-  .ltc_card:hover {
-    box-shadow: var(--shadow-lg);
-  }
+    .b3i-info-box {
+        grid-template-columns: 1fr;
+    }
 
-  /* Stack comparison tables more effectively */
-  .ltc_comparison_20251107_1515,
-  .crypto-article .comparison-table {
-    font-size: var(--text-xs);
-  }
+    .b3i-bonus-details {
+        grid-template-columns: 1fr;
+    }
 
-  /* Adjust FAQ padding */
-  .crypto-article .faq-item,
-  .ltc_faq_item {
-    padding: clamp(var(--space-4), 3vw, var(--space-6));
-  }
+    .b3i-bookie-review {
+        padding: 20px;
+    }
+
+    .b3i-summary-box {
+        padding: 20px;
+    }
+
+    .b3i-vs-table {
+        font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+    }
 }
 
 @media (max-width: 480px) {
-  :root {
-    /* Further reduce spacing on small phones */
-    --space-2: 0.375rem;
-    --space-3: 0.625rem;
-    --space-4: 0.75rem;
-  }
+    .b3i-content h1 {
+        font-size: 1.5rem;
+    }
 
-  /* Disable hover transforms on very small screens */
-  .coinbase-affiliate-tile .main-card-container:hover,
-  .crypto-article .main-card-container:hover,
-  .ltc_card:hover {
-    transform: none;
-  }
+    .b3i-content h2 {
+        font-size: 1.3rem;
+    }
 
-  .crypto-article .faq-item:hover,
-  .ltc_faq_item:hover {
-    transform: none;
-  }
-}
+    .b3i-intro {
+        font-size: 1rem;
+    }
 
-/* Tablet landscape optimizations */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .coinbase-affiliate-tile .quick-stats-bar,
-  .crypto-article .bookie-stats-bar,
-  .ltc_stats_bar {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Large desktop optimizations */
-@media (min-width: 1920px) {
-  :root {
-    /* Scale up slightly for large screens */
-    --text-base: 1.125rem;
-    --space-4: 1.125rem;
-    --space-6: 1.625rem;
-    --space-8: 2.25rem;
-  }
+    .b3i-pro-tip,
+    .b3i-did-you-know {
+        padding: 15px;
+    }
 }
 
 /* =========================
-   PERFORMANCE OPTIMIZATIONS
+   PRINT STYLES
    ========================= */
+@media print {
+    .b3i-content {
+        max-width: 100%;
+        padding: 0;
+    }
 
-/* Use content-visibility for better rendering performance */
-.ltc_card,
-.crypto-article .main-card-container,
-.coinbase-affiliate-tile .main-card-container {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 400px;
-}
+    .b3i-bookie-review,
+    .b3i-faq-item,
+    .b3i-summary-box {
+        page-break-inside: avoid;
+    }
 
-/* GPU acceleration for animated elements */
-.coinbase-affiliate-tile .cta-button,
-.crypto-article .bookie-cta-button,
-.ltc_cta_button,
-.coinbase-affiliate-tile .main-card-container,
-.crypto-article .main-card-container,
-.ltc_card {
-  will-change: transform;
-}
-
-/* Remove will-change after animation completes */
-@media (hover: hover) {
-  .coinbase-affiliate-tile .cta-button:not(:hover):not(:active),
-  .crypto-article .bookie-cta-button:not(:hover):not(:active),
-  .ltc_cta_button:not(:hover):not(:active),
-  .coinbase-affiliate-tile .main-card-container:not(:hover),
-  .crypto-article .main-card-container:not(:hover),
-  .ltc_card:not(:hover) {
-    will-change: auto;
-  }
+    .b3i-comparison-table,
+    .b3i-vs-table {
+        page-break-inside: avoid;
+    }
 }
 
 /* =========================
-   MODERN UTILITY CLASSES
+   ACCESSIBILITY
    ========================= */
+.b3i-content :focus {
+    outline: 2px solid #FCC419;
+    outline-offset: 2px;
+}
 
-/* Text utilities */
-.text-primary { color: var(--text-primary) !important; }
-.text-secondary { color: var(--text-secondary) !important; }
-.text-tertiary { color: var(--text-tertiary) !important; }
-.text-muted { color: var(--text-muted) !important; }
-.text-disabled { color: var(--text-disabled) !important; }
-.text-gold { color: var(--primary-gold) !important; }
-.text-success { color: var(--success) !important; }
-.text-error { color: var(--error) !important; }
-.text-warning { color: var(--warning) !important; }
-.text-info { color: var(--info) !important; }
+/* Skip link for keyboard navigation */
+.b3i-skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #FCC419;
+    color: #1a1a1a;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    font-weight: 600;
+    z-index: 100;
+}
 
-/* Font size utilities */
-.text-xs { font-size: var(--text-xs) !important; }
-.text-sm { font-size: var(--text-sm) !important; }
-.text-base { font-size: var(--text-base) !important; }
-.text-lg { font-size: var(--text-lg) !important; }
-.text-xl { font-size: var(--text-xl) !important; }
-.text-2xl { font-size: var(--text-2xl) !important; }
-.text-3xl { font-size: var(--text-3xl) !important; }
+.b3i-skip-link:focus {
+    top: 0;
+}
 
-/* Font weight utilities */
-.font-normal { font-weight: 400 !important; }
-.font-medium { font-weight: 500 !important; }
-.font-semibold { font-weight: 600 !important; }
-.font-bold { font-weight: 700 !important; }
-.font-extrabold { font-weight: 800 !important; }
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .b3i-content * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 
-/* Spacing utilities */
-.mt-0 { margin-top: 0 !important; }
-.mt-2 { margin-top: var(--space-2) !important; }
-.mt-4 { margin-top: var(--space-4) !important; }
-.mt-6 { margin-top: var(--space-6) !important; }
-.mt-8 { margin-top: var(--space-8) !important; }
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .b3i-content {
+        border: 2px solid currentColor;
+    }
 
-.mb-0 { margin-bottom: 0 !important; }
-.mb-2 { margin-bottom: var(--space-2) !important; }
-.mb-4 { margin-bottom: var(--space-4) !important; }
-.mb-6 { margin-bottom: var(--space-6) !important; }
-.mb-8 { margin-bottom: var(--space-8) !important; }
-
-/* Display utilities */
-.flex { display: flex !important; }
-.inline-flex { display: inline-flex !important; }
-.grid { display: grid !important; }
-.block { display: block !important; }
-.inline-block { display: inline-block !important; }
-.hidden { display: none !important; }
-
-/* Flex utilities */
-.flex-row { flex-direction: row !important; }
-.flex-col { flex-direction: column !important; }
-.items-center { align-items: center !important; }
-.items-start { align-items: flex-start !important; }
-.items-end { align-items: flex-end !important; }
-.justify-center { justify-content: center !important; }
-.justify-between { justify-content: space-between !important; }
-.justify-around { justify-content: space-around !important; }
-.gap-2 { gap: var(--space-2) !important; }
-.gap-4 { gap: var(--space-4) !important; }
-.gap-6 { gap: var(--space-6) !important; }
-
-/* Border radius utilities */
-.rounded-sm { border-radius: var(--radius-sm) !important; }
-.rounded-md { border-radius: var(--radius-md) !important; }
-.rounded-lg { border-radius: var(--radius-lg) !important; }
-.rounded-xl { border-radius: var(--radius-xl) !important; }
-.rounded-2xl { border-radius: var(--radius-2xl) !important; }
-.rounded-full { border-radius: var(--radius-full) !important; }
-
-/* Shadow utilities */
-.shadow-sm { box-shadow: var(--shadow-sm) !important; }
-.shadow-md { box-shadow: var(--shadow-md) !important; }
-.shadow-lg { box-shadow: var(--shadow-lg) !important; }
-.shadow-xl { box-shadow: var(--shadow-xl) !important; }
-.shadow-none { box-shadow: none !important; }
-
-/* Interactive states */
-.cursor-pointer { cursor: pointer !important; }
-.cursor-default { cursor: default !important; }
-.pointer-events-none { pointer-events: none !important; }
-.select-none { user-select: none !important; }
-
-/* Transitions */
-.transition-fast { transition: all var(--transition-fast) !important; }
-.transition-base { transition: all var(--transition-base) !important; }
-.transition-slow { transition: all var(--transition-slow) !important; }
-
-/* Position utilities */
-.relative { position: relative !important; }
-.absolute { position: absolute !important; }
-.fixed { position: fixed !important; }
-.sticky { position: sticky !important; }
-
-/* Overflow utilities */
-.overflow-hidden { overflow: hidden !important; }
-.overflow-auto { overflow: auto !important; }
-.overflow-x-auto { overflow-x: auto !important; }
-.overflow-y-auto { overflow-y: auto !important; }
-
-/* =========================
-   FINAL NOTES & DOCUMENTATION
-   ========================= */
-/*
- * MODERN B3I.TECH GLASSMORPHIC STYLES — 2025 EDITION
- *
- * This comprehensive CSS framework provides:
- * ✓ Modern glassmorphic design with enhanced blur effects
- * ✓ Comprehensive color scale system with gold branding
- * ✓ Fluid typography that scales beautifully across devices
- * ✓ Advanced micro-interactions and animations
- * ✓ Full accessibility support (WCAG AAA compliant)
- * ✓ Container queries for adaptive components
- * ✓ Performance optimizations (content-visibility, will-change)
- * ✓ Dark mode by default with system preference detection
- * ✓ Reduced motion support for accessibility
- * ✓ High contrast mode support
- * ✓ Modern utility class system
- *
- * USAGE IN ELEMENTOR:
- * - Place this in Site Settings → Custom CSS
- * - Or in individual widget Custom CSS (Elementor will auto-scope)
- * - For FAQ accordions, use JavaScript to toggle `.open` class
- * - Container queries work automatically for responsive components
- *
- * BROWSER SUPPORT:
- * - Modern evergreen browsers (Chrome, Firefox, Safari, Edge)
- * - Fallbacks provided for older browsers without backdrop-filter
- * - Progressive enhancement approach ensures basic functionality everywhere
- *
- * PERFORMANCE TIPS:
- * - Blur effects are reduced on mobile for better performance
- * - will-change is managed automatically to avoid over-optimization
- * - content-visibility improves rendering of off-screen content
- *
- * CUSTOMIZATION:
- * - Modify CSS custom properties in :root to adjust theme
- * - All colors, spacing, typography use CSS variables
- * - Easy to create variations or dark/light theme toggles
- */
+    .b3i-comparison-table,
+    .b3i-vs-table,
+    .b3i-bookie-review,
+    .b3i-info-box {
+        border: 2px solid currentColor;
+    }
+}
