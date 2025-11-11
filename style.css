@@ -1,0 +1,605 @@
+/* ============================================================
+   ENHANCED B3I.TECH GLASSMORPHIC STYLES — FULL OPTIMISED FILE
+   - Performance-minded
+   - Elementor-friendly scope (place in Site Settings or Additional CSS)
+   - No nested media queries
+   ============================================================ */
+
+/* =========================
+   ROOT VARIABLES / THEME
+   ========================= */
+:root{
+  /* Brand */
+  --primary-gold: #FCC419;
+  --primary-gold-hover: #FFD43B;
+  --primary-gold-dark: #FAB005;
+  --primary-gold-10: rgba(252,196,25,0.10);
+
+  /* Dark palette */
+  --bg-primary: #0A0A0B;
+  --bg-surface: #1F1F23;
+
+  /* Glass */
+  --glass-white: rgba(255,255,255,0.04);
+  --glass-white-hover: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-border-hover: rgba(255,255,255,0.12);
+
+  /* Shadows & blur */
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.37);
+  --glass-shadow-hover: 0 12px 48px rgba(0,0,0,0.45);
+  --blur-strong: blur(16px);
+  --blur-subtle: blur(8px);
+
+  /* Text */
+  --text-primary: rgba(255,255,255,0.95);
+  --text-secondary: rgba(255,255,255,0.75);
+  --text-muted: rgba(255,255,255,0.5);
+
+  /* Semantic */
+  --success: #10B981;
+  --error: #EF4444;
+  --info: #0EA5E9;
+
+  /* Motion */
+  --transition-fast: 150ms cubic-bezier(0.4,0,0.6,1);
+  --transition-base: 250ms cubic-bezier(0.4,0,0.2,1);
+  --transition-smooth: 350ms cubic-bezier(0.4,0,0.2,1);
+
+  /* Radii */
+  --radius-sm: clamp(6px,1vw,8px);
+  --radius-md: clamp(10px,1.5vw,12px);
+  --radius-lg: clamp(16px,2vw,20px);
+  --radius-xl: clamp(24px,3vw,28px);
+}
+
+/* =========================
+   GLOBAL OPTIMISATIONS
+   ========================= */
+*{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  box-sizing:border-box;
+}
+
+/* Prefer reduced motion - applied globally (not nested) */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports (backdrop-filter: blur(1px)){
+  .glass-effect { backdrop-filter: var(--blur-strong); -webkit-backdrop-filter: var(--blur-strong); }
+  .glass-effect-subtle { backdrop-filter: var(--blur-subtle); -webkit-backdrop-filter: var(--blur-subtle); }
+}
+@supports not (backdrop-filter: blur(1px)){
+  .glass-effect { background: rgba(255,255,255,0.06) !important; }
+  .glass-effect-subtle { background: rgba(255,255,255,0.04) !important; }
+}
+
+/* =========================
+   SHARED SELECTOR GROUPING
+   Targets: Coinbase tile, crypto article, ltc_* blocks
+   ========================= */
+.coinbase-affiliate-tile,
+.crypto-article,
+[class^="ltc_"] {
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* =========================
+   PAGE HEADER (title + intro)
+   ========================= */
+.ltc_page_header,
+.crypto-article .page-header {
+  padding: clamp(20px, 3vw, 36px) 0;
+  margin-bottom: clamp(8px, 1.5vw, 16px);
+}
+
+.ltc_page_header h1,
+.crypto-article .page-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.ltc_page_header p,
+.crypto-article .page-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+}
+
+/* =========================
+   MAIN CARD / TILE
+   ========================= */
+.coinbase-affiliate-tile .main-card-container,
+.crypto-article .main-card-container,
+.ltc_card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-base), background var(--transition-base);
+  will-change: transform;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+/* Hover lift & stronger glow */
+.coinbase-affiliate-tile .main-card-container:hover,
+.crypto-article .main-card-container:hover,
+.ltc_card:hover {
+  transform: translateY(-6px);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-hover), 0 0 40px rgba(252,196,25,0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%);
+}
+
+/* Small optimisation: reduce effects on reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .coinbase-affiliate-tile .main-card-container,
+  .crypto-article .main-card-container,
+  .ltc_card { transform: none !important; box-shadow: var(--glass-shadow) !important; }
+}
+
+/* =========================
+   CTA BUTTON (unified)
+   ========================= */
+.coinbase-affiliate-tile .cta-button,
+.crypto-article .bookie-cta-button,
+.ltc_cta_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(12px,2vw,16px) clamp(20px,4vw,32px);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  border: 1px solid rgba(252,196,25,0.3);
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
+  color: var(--bg-primary);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pulse animation (stops when hovered) */
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(252,196,25,0.30), inset 0 1px 0 rgba(255,255,255,0.15); }
+  50%   { box-shadow: 0 6px 30px rgba(252,196,25,0.45), inset 0 1px 0 rgba(255,255,255,0.18); }
+}
+.coinbase-affiliate-tile .cta-button:not(:hover),
+.crypto-article .bookie-cta-button:not(:hover),
+.ltc_cta_button:not(:hover) {
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+
+/* Hover and active */
+.coinbase-affiliate-tile .cta-button:hover,
+.crypto-article .bookie-cta-button:hover,
+.ltc_cta_button:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, var(--primary-gold-hover) 0%, var(--primary-gold) 100%);
+  box-shadow: 0 6px 30px rgba(252,196,25,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.coinbase-affiliate-tile .cta-button:active,
+.crypto-article .bookie-cta-button:active,
+.ltc_cta_button:active {
+  transform: translateY(0) scale(0.995);
+  transition-duration: 120ms;
+}
+
+/* Click ripple (CSS-only, subtle) */
+.coinbase-affiliate-tile .cta-button::after,
+.crypto-article .bookie-cta-button::after,
+.ltc_cta_button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, transparent 40%);
+  transform: translate(-50%,-50%) scale(0);
+  opacity: 0;
+  transition: transform 0.35s var(--transition-base), opacity 0.35s var(--transition-base);
+}
+.coinbase-affiliate-tile .cta-button:active::after,
+.crypto-article .bookie-cta-button:active::after,
+.ltc_cta_button:active::after {
+  transform: translate(-50%,-50%) scale(1.8);
+  opacity: 1;
+  transition-duration: 250ms;
+}
+
+/* =========================
+   QUICK STATS BAR / TRUST SIGNALS
+   ========================= */
+.coinbase-affiliate-tile .quick-stats-bar,
+.crypto-article .bookie-stats-bar,
+.ltc_stats_bar {
+  background: linear-gradient(90deg, rgba(252,196,25,0.03) 0%, rgba(252,196,25,0.01) 50%, rgba(252,196,25,0.03) 100%);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur-subtle);
+  -webkit-backdrop-filter: var(--blur-subtle);
+  padding: clamp(10px,2vw,16px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+  gap: clamp(8px,2vw,12px);
+  align-items: center;
+}
+
+/* Positive / rating highlights */
+.coinbase-affiliate-tile .stat-value.positive,
+.crypto-article .bookie-stat-value.positive,
+.ltc_stats_bar .stat-value.positive {
+  color: var(--success);
+  font-weight: 800;
+  text-shadow: 0 0 14px rgba(16,185,129,0.18);
+}
+.coinbase-affiliate-tile .stat-value.rating,
+.crypto-article .bookie-stat-value.rating,
+.ltc_stats_bar .stat-value.rating {
+  color: var(--primary-gold);
+  font-weight: 800;
+  text-shadow: 0 0 14px rgba(252,196,25,0.20);
+}
+
+/* =========================
+   TABS (improved UX)
+   ========================= */
+.coinbase-affiliate-tile .tab-button,
+.crypto-article .bookie-tab-button,
+.ltc_tabs .tab-button {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: clamp(8px,2vw,12px);
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color var(--transition-base), background var(--transition-base);
+  font-size: clamp(12px,2.5vw,14px);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  position: relative;
+}
+
+/* active underline animation */
+.coinbase-affiliate-tile .tab-button::before,
+.crypto-article .bookie-tab-button::before,
+.ltc_tabs .tab-button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 0;
+  background: var(--primary-gold);
+  transition: width var(--transition-base);
+}
+.coinbase-affiliate-tile .tab-button.active,
+.crypto-article .bookie-tab-button.active,
+.ltc_tabs .tab-button.active {
+  color: var(--primary-gold);
+  background: var(--glass-white-hover);
+  border-bottom-color: var(--primary-gold);
+}
+.coinbase-affiliate-tile .tab-button.active::before,
+.crypto-article .bookie-tab-button.active::before,
+.ltc_tabs .tab-button.active::before { width: 100%; }
+
+/* =========================
+   COMPARISON TABLE
+   ========================= */
+.ltc_comparison_20251107_1515,
+.crypto-article .comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--glass-white);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+}
+
+/* table header */
+.ltc_comparison_20251107_1515 thead,
+.crypto-article .comparison-table thead {
+  background: linear-gradient(135deg, rgba(252,196,25,0.15) 0%, rgba(252,196,25,0.08) 100%);
+  backdrop-filter: var(--blur-subtle);
+}
+.ltc_comparison_20251107_1515 th,
+.crypto-article .comparison-table th {
+  padding: clamp(12px,2vw,18px);
+  color: var(--primary-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem,1.4vw,0.9rem);
+  letter-spacing: 1px;
+  border-right: 1px solid rgba(252,196,25,0.08);
+  text-align: left;
+}
+
+/* table rows */
+.ltc_comparison_20251107_1515 tbody tr,
+.crypto-article .comparison-table tbody tr {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.ltc_comparison_20251107_1515 tbody tr:hover,
+.crypto-article .comparison-table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(252,196,25,0.06) 0%, rgba(252,196,25,0.03) 100%);
+  transform: scale(1.01);
+  box-shadow: 0 4px 20px rgba(252,196,25,0.08);
+}
+
+/* make table responsive: horizontal scroll on small screens */
+.ltc_comparison_20251107_1515,
+.crypto-article .comparison-table { display: block; width: 100%; overflow-x: auto; }
+
+/* =========================
+   PROS / CONS (green / red blocks)
+   ========================= */
+.ltc_proscons_20251107_1522 .pros-section,
+.crypto-article .bookie-pros-section,
+.ltc_pros_section {
+  background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(16,185,129,0.02) 100%);
+  border: 1px solid rgba(16,185,129,0.18);
+  border-left: 4px solid var(--success);
+  border-radius: var(--radius-md);
+  padding: clamp(16px,3vw,24px);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.ltc_proscons_20251107_1522 .cons-section,
+.crypto-article .bookie-cons-section,
+.ltc_cons_section {
+  background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(239,68,68,0.02) 100%);
+  border: 1px solid rgba(239,68,68,0.18);
+  border-left: 4px solid var(--error);
+  border-radius: var(--radius-md);
+  padding: clamp(16px,3vw,24px);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* hover emphasis */
+.ltc_proscons_20251107_1522 .pros-section:hover,
+.crypto-article .bookie-pros-section:hover,
+.ltc_pros_section:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.12);
+  border-left-width: 6px;
+}
+.ltc_proscons_20251107_1522 .cons-section:hover,
+.crypto-article .bookie-cons-section:hover,
+.ltc_cons_section:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(239,68,68,0.12);
+  border-left-width: 6px;
+}
+
+/* =========================
+   SUMMARY / INFO BOXES
+   ========================= */
+.crypto-article .summary-box,
+.ltc_summary_box {
+  background: linear-gradient(135deg, rgba(252,196,25,0.12) 0%, rgba(252,196,25,0.06) 100%);
+  border: 1px solid rgba(252,196,25,0.18);
+  border-radius: var(--radius-xl);
+  padding: clamp(20px,4vw,36px);
+  box-shadow: var(--glass-shadow), 0 0 60px rgba(252,196,25,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* floating radial highlight */
+.crypto-article .summary-box::before,
+.ltc_summary_box::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(circle at center, rgba(252,196,25,0.05) 0%, transparent 40%);
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes float {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  25% { transform: translate(-8px,-10px) rotate(90deg); }
+  50% { transform: translate(10px,-18px) rotate(180deg); }
+  75% { transform: translate(-12px,10px) rotate(270deg); }
+}
+
+/* summary items */
+.crypto-article .summary-item,
+.ltc_summary_item {
+  background: var(--glass-white);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--primary-gold);
+  border-radius: var(--radius-md);
+  padding: clamp(14px,3vw,20px);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.crypto-article .summary-item::before,
+.ltc_summary_item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(252,196,25,0.1), transparent);
+  transition: left 0.6s ease;
+}
+.crypto-article .summary-item:hover::before,
+.ltc_summary_item:hover::before { left: 100%; }
+.crypto-article .summary-item:hover,
+.ltc_summary_item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(252,196,25,0.12);
+  border-left-width: 6px;
+  background: var(--glass-white-hover);
+}
+
+/* =========================
+   FAQ / ACCORDION
+   ========================= */
+.crypto-article .faq-item,
+.ltc_faq_item {
+  background: var(--glass-white);
+  border: 1px solid var(--glass-border);
+  border-left: 6px solid var(--primary-gold);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px,3.5vw,28px);
+  margin: clamp(14px,3vw,24px) 0;
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-left-width var(--transition-base);
+  cursor: pointer;
+  position: relative;
+}
+
+/* arrow + hover */
+.crypto-article .faq-item::after,
+.ltc_faq_item::after {
+  content: "→";
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: var(--primary-gold);
+  opacity: 0;
+  transition: all var(--transition-base);
+}
+.crypto-article .faq-item:hover,
+.ltc_faq_item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--glass-shadow-hover), 0 0 40px rgba(252,196,25,0.08);
+  border-left-width: 8px;
+  background: var(--glass-white-hover);
+}
+.crypto-article .faq-item:hover::after,
+.ltc_faq_item:hover::after { opacity: 1; right: 25px; }
+
+/* simple accessible accordion state (assumes JS toggles .open) */
+.crypto-article .faq-item .answer,
+.ltc_faq_item .answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms var(--transition-base), padding 300ms var(--transition-base);
+}
+.crypto-article .faq-item.open,
+.ltc_faq_item.open {
+  border-left-width: 8px;
+}
+.crypto-article .faq-item.open .answer,
+.ltc_faq_item.open .answer {
+  max-height: 1000px; /* large enough for content; if very long, use JS-set height */
+  padding-top: 12px;
+}
+
+/* =========================
+   SKELETON LOADER
+   ========================= */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.skeleton-loader {
+  background: linear-gradient(90deg, var(--glass-white) 0%, rgba(252,196,25,0.05) 50%, var(--glass-white) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: var(--radius-md);
+}
+
+/* =========================
+   ACCESSIBILITY & FOCUS
+   ========================= */
+/* Strong focus ring for keyboard */
+*:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Increased contrast mode */
+@media (prefers-contrast: more) {
+  :root {
+    --glass-border: rgba(255,255,255,0.2);
+    --text-primary: rgba(255,255,255,1);
+    --text-secondary: rgba(255,255,255,0.9);
+  }
+  .coinbase-affiliate-tile .cta-button,
+  .crypto-article .bookie-cta-button {
+    border: 2px solid var(--primary-gold);
+    font-weight: 800;
+  }
+}
+
+/* =========================
+   MOBILE / CONTAINER QUERIES
+   ========================= */
+/* container query: ensure appropriate layout at small tile widths */
+.coinbase-affiliate-tile { container-type: inline-size; container-name: tile; }
+
+/* container-based adjustments */
+@container tile (max-width: 768px) {
+  .coinbase-affiliate-tile .tab-headers { grid-template-columns: 1fr; }
+  .coinbase-affiliate-tile .quick-stats-bar { grid-template-columns: repeat(2,1fr); }
+}
+
+/* general mobile adjustments */
+@media (max-width: 768px) {
+  :root {
+    --blur-strong: blur(12px);
+    --blur-subtle: blur(6px);
+  }
+  .glass-effect { backdrop-filter: var(--blur-subtle); -webkit-backdrop-filter: var(--blur-subtle); }
+  .coinbase-affiliate-tile .cta-button,
+  .crypto-article .bookie-cta-button { min-height: 44px; min-width: 44px; }
+  .coinbase-affiliate-tile .main-card-container,
+  .crypto-article .main-card-container { padding: clamp(12px,3vw,18px); }
+  /* reduce heavy shadows on mobile */
+  .coinbase-affiliate-tile .main-card-container:hover,
+  .crypto-article .main-card-container:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.28); }
+}
+
+/* =========================
+   UTILS / SMALL HELPERS
+   ========================= */
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.small { font-size: 0.85rem; }
+
+/* =========================
+   FINAL NOTES
+   ========================= */
+/* - This file is intentionally modular and de-duplicated.
+   - If you place this inside a single widget's Custom CSS in Elementor,
+     prefix rules with 'selector' (Elementor will scope).
+   - For the FAQ accordion, the CSS assumes a JS toggle that adds/removes `.open`.
+   - For very long table content, the comparison table is horizontally scrollable on small screens.
+   - If you want a minified copy, let me know and I will return a compressed version. */
