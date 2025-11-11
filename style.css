@@ -5,6 +5,12 @@
    - Advanced animations and micro-interactions
    - Full accessibility support
    - Responsive with container queries
+
+   IMPORTANT FOR WORDPRESS/ELEMENTOR USAGE:
+   - Wrap your content in a <div class="crypto-article"> or similar
+   - This provides the necessary dark background for glassmorphic effects
+   - Individual cards use .ltc_card class
+   - The dark background is REQUIRED for proper text visibility
    ============================================================ */
 
 /* =========================
@@ -291,14 +297,75 @@ button {
 }
 
 /* =========================
-   SHARED SELECTOR GROUPING
+   SHARED SELECTOR GROUPING & MAIN CONTAINER SETUP
    Targets: Coinbase tile, crypto article, ltc_* blocks
+   IMPORTANT: Sets dark background for proper glassmorphic effect
    ========================= */
 .coinbase-affiliate-tile,
 .crypto-article,
 [class^="ltc_"] {
   color: var(--text-primary);
   font-family: var(--font-sans);
+}
+
+/* Main containers MUST have dark background for glassmorphic design */
+.coinbase-affiliate-tile,
+.crypto-article {
+  background: var(--bg-primary);
+  min-height: 100%;
+  padding: clamp(var(--space-6), 4vw, var(--space-12));
+  position: relative;
+}
+
+/* Ensure all headings are visible with proper colors */
+.coinbase-affiliate-tile h1,
+.coinbase-affiliate-tile h2,
+.coinbase-affiliate-tile h3,
+.coinbase-affiliate-tile h4,
+.coinbase-affiliate-tile h5,
+.coinbase-affiliate-tile h6,
+.crypto-article h1,
+.crypto-article h2,
+.crypto-article h3,
+.crypto-article h4,
+.crypto-article h5,
+.crypto-article h6 {
+  color: var(--text-primary);
+}
+
+/* Ensure paragraphs and lists are visible */
+.coinbase-affiliate-tile p,
+.coinbase-affiliate-tile li,
+.coinbase-affiliate-tile td,
+.crypto-article p,
+.crypto-article li,
+.crypto-article td {
+  color: var(--text-secondary);
+}
+
+/* Strong/bold text gets slightly brighter */
+.coinbase-affiliate-tile strong,
+.crypto-article strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Ordered and unordered lists styling */
+.coinbase-affiliate-tile ol,
+.coinbase-affiliate-tile ul,
+.crypto-article ol,
+.crypto-article ul {
+  color: var(--text-secondary);
+  padding-left: var(--space-6);
+  margin: var(--space-4) 0;
+}
+
+.coinbase-affiliate-tile ol li,
+.coinbase-affiliate-tile ul li,
+.crypto-article ol li,
+.crypto-article ul li {
+  margin-bottom: var(--space-2);
+  line-height: 1.7;
 }
 
 /* =========================
@@ -319,23 +386,8 @@ button {
   color: var(--text-primary);
   letter-spacing: -0.03em;
   font-family: var(--font-display);
-  background: linear-gradient(135deg, var(--text-primary) 0%, rgba(255,255,255,0.7) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: 0 0 30px rgba(252,196,25,0.15);
   position: relative;
-}
-
-/* Optional: Add a subtle glow effect to headings */
-.ltc_page_header h1::after,
-.crypto-article .page-header h1::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  filter: blur(20px);
-  opacity: 0.3;
 }
 
 .ltc_page_header p,
@@ -470,35 +522,23 @@ button {
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  border: 2px solid transparent;
-  background:
-    linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
-    linear-gradient(135deg, var(--gold-400), var(--gold-600)) border-box;
+  border: none;
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-700) 100%);
   color: var(--bg-primary);
+  text-decoration: none;
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base),
-    filter var(--transition-base);
+    filter var(--transition-base),
+    background var(--transition-base);
   overflow: hidden;
   isolation: isolate;
 }
 
-/* Golden gradient background */
-.coinbase-affiliate-tile .cta-button::before,
-.crypto-article .bookie-cta-button::before,
-.ltc_cta_button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-700) 100%);
-  z-index: -1;
-  transition: opacity var(--transition-base);
-}
-
 /* Animated gradient on hover */
-.coinbase-affiliate-tile .cta-button:hover::before,
-.crypto-article .bookie-cta-button:hover::before,
-.ltc_cta_button:hover::before {
+.coinbase-affiliate-tile .cta-button:hover,
+.crypto-article .bookie-cta-button:hover,
+.ltc_cta_button:hover {
   background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
 }
 
